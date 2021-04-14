@@ -22,14 +22,17 @@ const createWindow = () => {
     height: 563,
     useContentSize: true,
     width: 1000,
+    minWidth: 500,
+    minHeight: 300,
     frame: false,
+    backgroundColor: '#333',
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true
     }
   }
-  getData('fullScreen') && JSON.assign({'fullscreen': true})
+  getData('fullScreen') && Object.assign(options, {'fullscreen': true})
   mainWindow = new BrowserWindow(options)
 
   mainWindow.loadURL(winURL)
