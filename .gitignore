@@ -12,3 +12,4 @@ thumbs.db
 /test/
 /.travis.yml
 /appveyor.yml
+/build/

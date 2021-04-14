@@ -30,23 +30,9 @@
     "files": [
       "dist/electron/**/*"
     ],
-    "dmg": {
-      "contents": [
-        {
-          "x": 410,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        },
-        {
-          "x": 130,
-          "y": 150,
-          "type": "file"
-        }
-      ]
-    },
     "mac": {
-      "icon": "build/icons/icon.icns"
+      "icon": "build/icons/icon.icns",
+      "target": "dmg"
     },
     "win": {
       "icon": "build/icons/icon.ico"
@@ -57,6 +43,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "copy-webpack-plugin": "^6.2.1",
     "electron-settings": "^4.0.2",
     "electron-store": "^2.0.0",
     "element-ui": "^2.15.1",
@@ -80,13 +67,12 @@
     "cfonts": "^2.1.2",
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
-    "copy-webpack-plugin": "^8.1.1",
     "cross-env": "^5.1.6",
     "css-loader": "^5.2.1",
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^12.0.2",
-    "electron-builder": "^20.19.2",
+    "electron-builder": "^22.10.5",
     "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.4",
     "eslint": "^4.19.1",
