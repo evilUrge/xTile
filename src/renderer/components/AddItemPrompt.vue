@@ -1,34 +1,22 @@
 <template>
-  <el-dialog
-      title="Add a new game"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose">
-    <span>
-      Browse and get your game link asap!
-    <el-row>
-      <el-select v-model="value" placeholder="Type">
-        <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-
-        </el-option>
-      </el-select>
-      <el-input
-          placeholder="Please input"
-          v-model="input"
-          clearable
-          disabled=true>
-      </el-input>
-    </el-row>
-    </span>
-    <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
-  </span>
-  </el-dialog>
+  <div id="addItem" class="modal modal-fx-fadeInScale">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Modal title</p>
+        </header>
+        <section class="modal-card-body">
+          <!-- Content ... -->
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Save changes</button>
+          <button class="button" @click="close()">Cancel</button>
+        </footer>
+      </div>
+    </div>
+    <button id="image-modal-close" class="modal-close" @click="close()"></button>
+  </div>
 </template>
 
 <script>
@@ -37,6 +25,7 @@ export default {
   data () {
     return {
       dialogVisible: false,
+      textInputDisabled: true,
       options: [{
         value: 'exe',
         label: 'Executable'
@@ -51,9 +40,17 @@ export default {
       input: ''
     }
   },
+  methods: {
+    close () {
+      document.querySelector('#addItem').classList.remove('is-active')
+    },
+    save () {
+      console.log(this.$store.gameList.listOfGames)
+    }
+  },
   mounted () {
     this.$root.$on('AddItemPrompt', () => {
-      this.dialogVisible = true
+      document.querySelector('#addItem').classList.add('is-active')
     })
   }
 }

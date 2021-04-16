@@ -22,8 +22,8 @@ const createWindow = () => {
     height: 563,
     useContentSize: true,
     width: 1000,
-    minWidth: 500,
-    minHeight: 300,
+    minWidth: 770,
+    minHeight: 350,
     frame: false,
     backgroundColor: '#333',
     webPreferences: {

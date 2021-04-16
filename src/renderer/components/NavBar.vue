@@ -1,53 +1,87 @@
 <template>
-  <el-row type="flex" class="row-bg">
-    <el-col>
-      <el-button class="upper-icons" @click="exit()" type="danger" icon="el-icon-circle-close" circle></el-button>
-      <el-button class="upper-icons" @click="fullscreen()" icon="el-icon-setting" small circle></el-button>
-      <el-button class="upper-icons" @click="fullscreen()" icon="el-icon-full-screen" circle></el-button>
-      <el-button class="upper-icons" @click="add()" icon="el-icon-document-add" circle></el-button>
-    </el-col>
-    <el-col justify="end" class="text-title">
-      xTile
-    </el-col>
-  </el-row>
+  <nav class="navbar level" role="navigation" aria-label="main navigation">
+    <div class="level-left">
+      <button class="button is-primary is-circular" @click="exit()">
+        <v-icon name="times-circle"/>
+      </button>
+      <button class="button is-primary is-circular">
+        <v-icon name="cog"/>
+      </button>
+      <button class="button is-primary is-circular" @click="fullscreen()">
+        <v-icon name="expand"/>
+      </button>
+      <button class="button is-primary is-circular" @click="add()">
+        <v-icon name="plus-square"/>
+      </button>
+    </div>
+    <div class="level-item text-title"><img src="static/logo.svg" style="height: 35px"></div>
+    <div class="level-right">{{ datenow }}</div>
+  </nav>
 </template>
 
 
 <script>
-
+import * as moment from 'moment'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/times-circle'
+import 'vue-awesome/icons/cog'
+import 'vue-awesome/icons/expand'
+import 'vue-awesome/icons/plus-square'
+import { getCurrentWindow, app } from '@electron/remote'
 export default {
   name: 'nav-bar',
-  components: {},
+  data () {
+    return {
+      datenow: ''
+    }
+  },
+  components: {
+    'v-icon': Icon
+  },
   methods: {
     open (link) {
       this.$electron.shell.openExternal(link)
     },
+    time () {
+      this.datenow = moment().format('HH:mm:ss DD-MM-YYYY')
+      setTimeout(this.time, 1000)
+    },
     fullscreen () {
-      const window = require('electron').remote.getCurrentWindow()
+      const window = getCurrentWindow()
       window.setFullScreen(!window.isFullScreen())
-      console.log(require('../services/settings').getData('fullscreen'))
       require('../services/settings').setData('fullscreen', !window.isFullScreen())
     },
     exit () {
-      require('electron').remote.app.quit()
+      app.quit()
     },
     add () {
       this.$root.$emit('AddItemPrompt', true)
     }
+  },
+  mounted () {
+    this.time()
   }
 }
 </script>
 
 <style scoped>
-.upper-icons {
-  padding: 2px !important;
+.navbar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  background-color: #4D344D;
+  height: 45px !important;
+}
+
+.is-circular {
   background: top;
-  margin-top: 15px;
   -webkit-app-region: no-drag;
+  border-radius: 50%;
+  height: 16px;
+  width: 16px;
 }
 
 .text-title {
-  margin-top: 15px;
+  margin-left: -50px;
 }
 
 </style>
