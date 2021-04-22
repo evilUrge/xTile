@@ -51,6 +51,7 @@
     "electron-settings": "^4.0.2",
     "electron-store": "^2.0.0",
     "moment": "^2.29.1",
+    "source-map-support": "^0.4.18",
     "vue": "^2.5.16",
     "vue-awesome": "^4.1.0",
     "vue-electron": "^1.0.6",

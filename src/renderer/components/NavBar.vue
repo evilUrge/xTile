@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar level" role="navigation" aria-label="main navigation">
+  <nav class="level is-transparent" id="navbar" role="navigation" aria-label="main navigation">
     <div class="level-left">
       <button class="button is-primary is-circular" @click="exit()">
         <v-icon name="times-circle"/>
@@ -14,7 +14,7 @@
         <v-icon name="plus-square"/>
       </button>
     </div>
-    <div class="level-item text-title"><img src="static/logo.svg" style="height: 35px"></div>
+    <div class="level-item text-title"><img src="static/img/logo.svg" style="height: 35px"></div>
     <div class="level-right">{{ datenow }}</div>
   </nav>
 </template>
@@ -27,7 +27,9 @@ import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/cog'
 import 'vue-awesome/icons/expand'
 import 'vue-awesome/icons/plus-square'
-import { getCurrentWindow, app } from '@electron/remote'
+import {app} from '@electron/remote'
+import {ipcRenderer} from 'electron'
+
 export default {
   name: 'nav-bar',
   data () {
@@ -47,9 +49,7 @@ export default {
       setTimeout(this.time, 1000)
     },
     fullscreen () {
-      const window = getCurrentWindow()
-      window.setFullScreen(!window.isFullScreen())
-      require('../services/settings').setData('fullscreen', !window.isFullScreen())
+      ipcRenderer.send('toggleFullScreen')
     },
     exit () {
       app.quit()
@@ -65,11 +65,10 @@ export default {
 </script>
 
 <style scoped>
-.navbar {
+.is-transparent {
   -webkit-user-select: none;
   -webkit-app-region: drag;
-  background-color: #4D344D;
-  height: 45px !important;
+  /*height: 45px !important;*/
 }
 
 .is-circular {
@@ -84,4 +83,7 @@ export default {
   margin-left: -50px;
 }
 
+.level-right {
+  color: white;
+}
 </style>

@@ -2,11 +2,15 @@ const state = {
   listOfGames: [{
     name: 'Fallout New Vegas',
     img: 'static/fallout_new_vegas.jpg',
-    type: 'rpg'
+    type: 'rpg',
+    uri: {
+      'url-route': '#?cmsId=100250211&launchSource=External&shortName=death_stranding_steam&parentGameId=48a598f8-4719-4d9f-b2db-f2f7461c40f7'
+    }
   }, {
     name: 'Cyberpunk 2077',
-    img: 'static/fallout_new_vegas.jpg',
-    type: 'rpg'
+    img: 'static/cyberpunk.jpg',
+    type: 'rpg',
+    uri: ''
   }]
 }
 const mutations = {

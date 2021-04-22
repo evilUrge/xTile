@@ -1,6 +1,6 @@
 'use strict'
 
-import {app, BrowserWindow, nativeTheme} from 'electron'
+import {app, BrowserWindow, nativeTheme, ipcMain} from 'electron'
 import {getData} from '../renderer/services/settings'
 
 /**
@@ -53,7 +53,10 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
+ipcMain.on('toggleFullScreen', (event) => {
+  mainWindow.setFullScreen(!mainWindow.isFullScreen())
+  event.reply(mainWindow.isFullScreen() ? 'is-transparent' : 'navbar')
+})
 /**
  * Auto Updater
  *
