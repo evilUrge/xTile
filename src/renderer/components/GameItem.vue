@@ -1,10 +1,10 @@
 <template>
-  <!--  <th v-for="game in this.$store.state.gameList.listOfGames" :key="game.name">-->
-  <!--    <img :src=game.img />-->
-  <!--    {{ game.name }}-->
-  <!--  </th>-->
   <div class="columns">
-    <div v-for="game in this.$store.state.gameList.listOfGames" :key="game.name" class="column gameItem block">
+    <div v-for="game in this.$store.state.gameList.listOfGames" :key="game.name" :id="game.id"
+         class="column gameItem block" @mouseover="mouseOver(game.id)"
+         @mouseleave="mouseIsDown(game.id)"
+        @click="executor(game.uri)"
+    >
       <img :src=game.img @click="executor('.')"/>
       {{ game.name }}
     </div>
@@ -13,13 +13,19 @@
 </template>
 
 <script>
-// import {executor} from '../services/utils'
-// import * as childProcess from 'child_process'
+
+import {ipcRenderer} from 'electron'
 
 export default {
   name: 'GameItem',
   methods: {
-    executor: (exe) => true // childProcess('open', exe)
+    mouseOver: (id) => {
+      document.getElementById(id).style.maxWidth = '80%'
+    },
+    mouseIsDown: (id) => {
+      document.getElementById(id).style.maxWidth = '100%'
+    },
+    executor: (exe) => ipcRenderer.send('runExecutable', exe)
   }
 }
 </script>
@@ -27,6 +33,7 @@ export default {
 <style scoped>
 .columns {
   display: -webkit-box;
+  z-index: 99;
 }
 
 .gameItem {
@@ -34,7 +41,7 @@ export default {
   border-radius: .25em;
   box-shadow: 0 0 .25em rgba(0, 0, 0, .25);
   box-sizing: border-box;
-  padding: 0px;
+  padding: 0;
   flex-basis: auto;
 }
 </style>

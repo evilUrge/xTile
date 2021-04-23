@@ -2,6 +2,7 @@
 
 import {app, BrowserWindow, nativeTheme, ipcMain} from 'electron'
 import {getData} from '../renderer/services/settings'
+import {exec} from 'child_process'
 
 /**
  * Set `__static` path to static files in production
@@ -56,6 +57,20 @@ app.on('activate', () => {
 ipcMain.on('toggleFullScreen', (event) => {
   mainWindow.setFullScreen(!mainWindow.isFullScreen())
   event.reply(mainWindow.isFullScreen() ? 'is-transparent' : 'navbar')
+})
+ipcMain.on('runExecutable', (event, args) => {
+  console.log(args)
+  exec(`open ${args}`, (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`)
+      return
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`)
+      return
+    }
+    console.log(`stdout: ${stdout}`)
+  })
 })
 /**
  * Auto Updater
