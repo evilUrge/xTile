@@ -27,7 +27,6 @@ import 'vue-awesome/icons/times-circle'
 import 'vue-awesome/icons/cog'
 import 'vue-awesome/icons/expand'
 import 'vue-awesome/icons/plus-square'
-import {app} from '@electron/remote'
 import {ipcRenderer} from 'electron'
 
 export default {
@@ -52,7 +51,7 @@ export default {
       ipcRenderer.send('toggleFullScreen')
     },
     exit () {
-      app.quit()
+      ipcRenderer.send('quit')
     },
     add () {
       this.$root.$emit('AddItemPrompt', true)

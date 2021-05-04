@@ -58,8 +58,8 @@ ipcMain.on('toggleFullScreen', (event) => {
   mainWindow.setFullScreen(!mainWindow.isFullScreen())
   event.reply(mainWindow.isFullScreen() ? 'is-transparent' : 'navbar')
 })
+ipcMain.on('quit', () => app.quit())
 ipcMain.on('runExecutable', (event, args) => {
-  console.log(args)
   exec(`open ${args}`, (error, stdout, stderr) => {
     if (error) {
       console.log(`error: ${error.message}`)
