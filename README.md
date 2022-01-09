@@ -2,8 +2,7 @@
 #### Make your desktop into a console
 ![xTile screenshot](https://storage.googleapis.com/shell-gems.appspot.com/img/xtilescreen.png)
 ---
-### 🚧 WORK IN PROGRESS - STILL UNDER DEVELOPMENT! 
-> I'm not a Frontend developer & I'm not pretend to be one!
+# Archived - Because of [Playnite](https://github.com/JosefNemec/Playnite/)❤️
 
 ---
 
